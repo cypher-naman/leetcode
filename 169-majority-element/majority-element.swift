@@ -1,13 +1,14 @@
 class Solution {
     func majorityElement(_ nums: [Int]) -> Int {
-        var frequencyDict: [Int: Int] = [:]
-        let majority = nums.count/2
+        var current = 0
+        var count = 0
+
         for num in nums {
-            frequencyDict[num, default: 0] += 1
-            if frequencyDict[num]! > majority {
-             return num
+            if count == 0 {
+                current = num
             }
+            count += num == current ? 1 : -1 
         }
-        return nums[0]
+        return current
     }
 }
