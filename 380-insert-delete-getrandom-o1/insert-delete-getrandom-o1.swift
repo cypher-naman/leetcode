@@ -1,21 +1,27 @@
 
 class RandomizedSet {
-    var intSet = Set<Int>()
+    var array = [Int]()
+    var dict = [Int: Int]()
     init() {
         
     }
     
     func insert(_ val: Int) -> Bool {
-        if intSet.contains(val) {
+        if let _ = dict[val] { // found value in map
             return false
         } else {
-            intSet.insert(val)
+            dict[val] = array.count
+            array.append(val)
             return true
         }
     }
     
     func remove(_ val: Int) -> Bool {
-        if let numberRemoved = intSet.remove(val) {
+        if let index = dict[val] {
+            array.swapAt(index, array.count-1)
+            dict[array[index]] = index
+            array.removeLast()
+            dict.removeValue(forKey: val)
             return true
         } else {
             return false
@@ -23,7 +29,7 @@ class RandomizedSet {
     }
     
     func getRandom() -> Int {
-        intSet.randomElement() ?? intSet.first ?? 0
+        array.randomElement() ?? 0
     }
 }
 
