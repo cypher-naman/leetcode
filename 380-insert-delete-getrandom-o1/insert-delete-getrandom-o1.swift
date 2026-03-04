@@ -7,7 +7,7 @@ class RandomizedSet {
     }
     
     func insert(_ val: Int) -> Bool {
-        if let _ = dict[val] { // found value in map
+        if dict[val] != nil { // found value in map
             return false
         } else {
             dict[val] = array.count
@@ -29,7 +29,7 @@ class RandomizedSet {
     }
     
     func getRandom() -> Int {
-        array.randomElement() ?? 0
+        array[Int.random(in: 0..<array.count)]
     }
 }
 
