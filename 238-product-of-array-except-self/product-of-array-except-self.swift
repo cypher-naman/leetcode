@@ -1,34 +1,18 @@
 class Solution {
     func productExceptSelf(_ nums: [Int]) -> [Int] {
-        var product = 1
-        var doesContainZero = false
-        var noOfZeroes = 0
-        for num in nums { // O(N)
-            if num != 0 {
-                product *= num
-            } else {
-                noOfZeroes += 1
-                doesContainZero = true
-            }
+        var resultArray = Array(repeating: 1, count: nums.count) // O(N)
+        var prefixMultiplication = 1
+        var suffixMultiplication = 1
+
+        for index in 0..<nums.count { // O(N)
+            resultArray[index] *= prefixMultiplication
+            prefixMultiplication *= nums[index]
         }
 
-        var outputArray = [Int]() // space  O(N)
-
-        for num in nums { // O(N)
-            if num == 0 {
-                if doesContainZero && noOfZeroes > 1 {
-                    outputArray.append(0)
-                } else {
-                    outputArray.append(product)
-                }
-                
-            } else if doesContainZero {
-                 outputArray.append(0)
-            } else {
-                let divided = (product / num)
-                outputArray.append(divided)
-            }
+        for index in stride(from: nums.count-1, through: 0, by: -1) { // O(N)
+            resultArray[index] *= suffixMultiplication
+            suffixMultiplication *= nums[index]
         }
-        return outputArray // total time complexity = 2 * O(N), space = O(N)
+        return resultArray // time - // 2 * O(N, space - // O(N)
     }
 }
