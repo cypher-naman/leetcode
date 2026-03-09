@@ -6,7 +6,7 @@ class Solution {
             if n >= 1000 {
                 n-=1000
                 s.append("M")
-            }else if n >= 900 {
+            } else if n >= 900 {
                 n-=900
                 s.append("CM")
             } else if n >= 500 {
